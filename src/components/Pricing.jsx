@@ -1,6 +1,7 @@
-// Pricing.jsx - Tabbed pricing layout with dark red borders + reddish section effect
+// Pricing.jsx - Tabbed pricing layout with fade in/out section animation using Framer Motion + Intersection Observer
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const pricingTabs = ["Pick Your Piece", "Best Value Combos", "Monthly Packages"];
 
@@ -29,9 +30,17 @@ const plans = {
 
 const Pricing = () => {
   const [activeTab, setActiveTab] = useState("Pick Your Piece");
+  const { ref, inView } = useInView({ threshold: 0.2 });
 
   return (
-    <section id="pricing" className="bg-gradient-to-br from-black via-[#1a0a0a] to-black text-white py-20 px-6 md:px-16">
+    <motion.section
+      id="pricing"
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.8 }}
+      className="bg-gradient-to-br from-black via-[#1a0a0a] to-black text-white py-20 px-6 md:px-16"
+    >
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-metavanta-silver mb-10">
           Pricing <span className="text-metavanta-white">Plans</span>
@@ -74,7 +83,7 @@ const Pricing = () => {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

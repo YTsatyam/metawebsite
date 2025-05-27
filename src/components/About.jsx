@@ -1,42 +1,42 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 const About = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+
+  const logoY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
   return (
-    <section id="about" className="min-h-screen bg-black text-white flex items-center justify-center px-6 md:px-20 py-16">
-      <div className="max-w-7xl w-full flex flex-col md:flex-row items-center gap-12">
-        
-        {/* LOGO SIDE */}
-        <motion.div
-          className="w-full md:w-1/2 flex justify-center"
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 100 }}
-          transition={{ duration: 0.8 }}
-        >
+    <section id="about" ref={ref} className="bg-metavanta-black py-20 px-6 md:px-20">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
+        {/* Logo with parallax */}
+        <motion.div style={{ y: logoY }} className="md:w-1/2 w-full px-4 flex justify-center">
           <img
-            src="/assets/metavanta-logo.jpg"
+            src="/metawebsite/assets/metavanta-logo.jpg"
             alt="MetaVanta Logo"
-            className="w-[350px] md:w-[500px] h-auto object-contain"
+            className="w-72 md:w-96 h-auto object-contain"
           />
         </motion.div>
 
-        {/* TEXT SIDE */}
+        {/* Text with parallax */}
         <motion.div
-          className="w-full md:w-1/2 flex items-center"
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 100 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          style={{ y: textY }}
+          className="md:w-1/2 w-full px-4 flex flex-col justify-center mt-10 md:mt-0"
         >
-          <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-silver">About MetaVanta</h2>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              MetaVanta Media is a Gen-Z-powered creative agency helping brands go viral and stay relevant. 
-              From short-form content to trend-first strategies, we craft bold visuals, viral moments, and 
-              content that cuts through the noise. We're not just creating content — we're building culture.
-            </p>
-          </div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-metavanta-silver">
+            ABOUT <span className="text-metavanta-white">METAVANTA</span>
+          </h2>
+          <p className="text-metavanta-grey mb-4 text-lg leading-relaxed">
+            MetaVanta Media is a Gen-Z social media agency founded by digital natives who understand the pulse of the internet. We eat, sleep, and breathe trends.
+          </p>
+          <p className="text-metavanta-grey mb-4 text-lg leading-relaxed">
+            Our team of creators, strategists, and editors are obsessed with virality. We specialize in short-form content that stops thumbs and converts viewers into customers.
+          </p>
+          <p className="text-metavanta-grey text-lg leading-relaxed">
+            From Reels to TikTok to YouTube Shorts — we know what makes content pop in today's attention economy.
+          </p>
         </motion.div>
       </div>
     </section>

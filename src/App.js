@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -7,28 +6,20 @@ import Portfolio from './components/Portfolio';
 import Team from './components/Team';
 import Pricing from './components/Pricing';
 import Contact from './components/Contact';
-
-
+import BackToTop from './components/BackToTop';
 
 function App() {
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollPosition(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="bg-metavanta-black text-metavanta-white">
       <Navbar />
-      <Hero scrollPosition={scrollPosition} />
+      <Hero />
       <About />
       <Services />
       <Portfolio />
       <Team />
       <Pricing />
       <Contact />
+      <BackToTop />
     </div>
   );
 }

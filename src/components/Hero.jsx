@@ -1,33 +1,36 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
-const Hero = ({ scrollPosition }) => {
+const Hero = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+
+  const headingY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const subtextY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const buttonY = useTransform(scrollYProgress, [0, 1], [0, -30]);
+
   return (
-    <section
-      id="home"
-      className="relative flex items-center justify-center min-h-screen bg-metavanta-black text-metavanta-white"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center px-6"
-      >
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">
-          We Make Brands Go Viral 🚀
-        </h1>
-        <p className="text-metavanta-grey text-lg md:text-xl max-w-2xl mx-auto">
-          Short-form content. Trend-driven strategy. Gen-Z creative power.
-        </p>
-        <a
+    <section id="home" ref={ref} className="relative h-screen flex items-center justify-center text-center px-6 md:px-20 bg-metavanta-black">
+      <div className="max-w-4xl mx-auto">
+        <motion.h1
+          style={{ y: headingY }}
+          className="text-4xl md:text-6xl font-bold text-metavanta-white mb-6"
+        >
+          We Don’t Just Post — We Create Culture.
+        </motion.h1>
+        <motion.p
+          style={{ y: subtextY }}
+          className="text-lg md:text-xl text-metavanta-grey mb-10"
+        >
+          MetaVanta Media — your Gen-Z growth partner for reels, reach & relevance.
+        </motion.p>
+        <motion.a
           href="#contact"
-          className="inline-block mt-10 px-6 py-3 border border-metavanta-white text-metavanta-white rounded-full hover:bg-metavanta-white hover:text-metavanta-black transition"
+          style={{ y: buttonY }}
+          className="inline-block px-6 py-3 bg-metavanta-white text-black font-semibold rounded-full hover:scale-105 transition"
         >
           Work With Us
-        </a>
-      </motion.div>
-
-      <div className="absolute bottom-10 animate-bounce">
-        <span className="text-metavanta-grey">Scroll ↓</span>
+        </motion.a>
       </div>
     </section>
   );

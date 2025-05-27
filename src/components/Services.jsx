@@ -1,54 +1,68 @@
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+
+const services = [
+  {
+    title: "Reels & Video Editing",
+    description: "Scroll-stopping short-form content",
+    icon: "🎬"
+  },
+  {
+    title: "Static Post Design",
+    description: "Gen-Z branded feed visuals",
+    icon: "🖼"
+  },
+  {
+    title: "Trend Research",
+    description: "What’s hot, what’s next — decoded for your brand",
+    icon: "🔥"
+  },
+  {
+    title: "Content Strategy",
+    description: "Big-picture planning, platform-specific insights",
+    icon: "📈"
+  },
+  {
+    title: "Caption + Hashtag Writing",
+    description: "Copy that clicks and connects",
+    icon: "✍️"
+  }
+];
+
 const Services = () => {
-  const services = [
-    {
-      title: "Reels & Video Editing",
-      description: "Scroll-stopping short-form content",
-      icon: "🎬",
-    },
-    {
-      title: "Content Strategy",
-      description: "Trend-focused creative direction",
-      icon: "🧠",
-    },
-    {
-      title: "Instagram Growth",
-      description: "From aesthetics to engagement",
-      icon: "📈",
-    },
-    {
-      title: "Brand Campaigns",
-      description: "Create viral brand moments",
-      icon: "📣",
-    },
-    {
-      title: "YouTube Shorts & TikTok",
-      description: "Optimized for multi-platform virality",
-      icon: "🎥",
-    },
-  ];
+  const { ref, inView } = useInView({ threshold: 0.2 });
 
   return (
-    <section id="services" className="py-20 px-6 bg-metavanta-black">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-5xl font-bold mb-12 text-metavanta-silver">
-          OUR <span className="text-metavanta-white">SERVICES</span>
+    <motion.section
+      id="services"
+      ref={ref}
+      initial={{ opacity: 0, y: 60 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+      transition={{ duration: 0.8 }}
+      className="bg-metavanta-black py-20 px-6 md:px-20"
+    >
+      <motion.div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-metavanta-silver mb-12">
+          What We <span className="text-metavanta-white">Do</span>
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-metavanta-grey/10 p-6 rounded-xl hover:scale-105 transition duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-metavanta-grey/10 border border-metavanta-grey rounded-xl p-6 shadow-md hover:scale-105 transition"
             >
-              <div className="text-4xl mb-4">{service.icon}</div>
-              <h3 className="text-xl font-bold text-metavanta-white mb-2">
-                {service.title}
-              </h3>
-              <p className="text-metavanta-grey">{service.description}</p>
-            </div>
+              <div className="text-3xl mb-4">{service.icon}</div>
+              <h3 className="text-xl font-bold text-metavanta-white mb-2">{service.title}</h3>
+              <p className="text-metavanta-silver text-sm">{service.description}</p>
+            </motion.div>
           ))}
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 

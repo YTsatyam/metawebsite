@@ -1,15 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  @apply bg-metavanta-black text-metavanta-white font-sans;
+.glitch {
+  position: relative;
+  display: inline-block;
+  animation: glitch 1.5s infinite;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-thumb {
-  @apply bg-metavanta-grey rounded-full;
+@keyframes glitch {
+  0% {
+    text-shadow: 2px 2px #ff005a, -2px -2px #00f7ff;
+  }
+  20% {
+    text-shadow: -2px -2px #ff005a, 2px 2px #00f7ff;
+  }
+  40% {
+    text-shadow: 2px -2px #ff005a, -2px 2px #00f7ff;
+  }
+  60% {
+    text-shadow: 1px 1px #ff005a, -1px -1px #00f7ff;
+  }
+  80% {
+    text-shadow: -1px 1px #ff005a, 1px -1px #00f7ff;
+  }
+  100% {
+    text-shadow: 2px 2px #ff005a, -2px -2px #00f7ff;
+  }
 }
