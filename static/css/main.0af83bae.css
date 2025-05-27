@@ -1,0 +1,2 @@
+.glitch{animation:glitch 1.5s infinite;display:inline-block;position:relative}@keyframes glitch{0%{text-shadow:2px 2px #ff005a,-2px -2px #00f7ff}20%{text-shadow:-2px -2px #ff005a,2px 2px #00f7ff}40%{text-shadow:2px -2px #ff005a,-2px 2px #00f7ff}60%{text-shadow:1px 1px #ff005a,-1px -1px #00f7ff}80%{text-shadow:-1px 1px #ff005a,1px -1px #00f7ff}to{text-shadow:2px 2px #ff005a,-2px -2px #00f7ff}}
+/*# sourceMappingURL=main.0af83bae.css.map*/
