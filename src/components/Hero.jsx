@@ -16,7 +16,7 @@ const Hero = () => {
           style={{ y: headingY }}
           className="text-4xl md:text-6xl font-bold text-metavanta-white mb-6"
         >
-          We Don’t Just Post and share— We Create Culture.
+          We Don’t Just Post and share — We Create Culture.
         </motion.h1>
         <motion.p
           style={{ y: subtextY }}
